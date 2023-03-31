@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonDataTool", "JsonDataTool\JsonDataTool.csproj", "{41943F02-3DC7-40FD-B31F-78B55B011153}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshot", "Screenshot", "{DBAE1769-5F87-4F79-ABDE-AD78C01AF5C1}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshot\JsonDataComparerScreen.PNG = Screenshot\JsonDataComparerScreen.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
