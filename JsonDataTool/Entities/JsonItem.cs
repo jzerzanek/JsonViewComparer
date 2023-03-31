@@ -30,7 +30,6 @@ namespace JsonDataTool.Entities
             set => ExecuteAndNotify(() =>
             {
                 jsonValue = value;
-                NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(FormatedJsonValue));
             });
         }

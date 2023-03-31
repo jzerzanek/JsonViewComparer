@@ -9,6 +9,8 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+                
                 <ResourceDictionary Source="Resources/Icons/NoneIcon.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/AddIcon.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/ReloadIcon.xaml"/>
