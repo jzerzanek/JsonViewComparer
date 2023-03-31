@@ -64,7 +64,7 @@
                       CanUserDeleteRows="False"
                       HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Binding="{Binding IsSelected}"
+                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
                                             CanUserSort="False"
                                             Width="25">
                         <DataGridCheckBoxColumn.Header>
