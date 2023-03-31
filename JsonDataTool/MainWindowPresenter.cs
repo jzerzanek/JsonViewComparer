@@ -84,8 +84,6 @@ namespace JsonDataTool
 
         private void Reload()
         {
-            this.IsSelectedAll = false;
-
             Mouse.OverrideCursor = Cursors.Wait;
 
             try
@@ -132,7 +130,10 @@ namespace JsonDataTool
         
         private void OnJsonItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            this.RefreshCommands();
+            if (e.PropertyName == nameof(JsonItem.IsSelected))
+            {
+                this.RefreshCommands();
+            }
         }
 
         private void Compare()

@@ -11,6 +11,9 @@ namespace JsonDataTool.Controls
         public JsonItem LeftJson { get;}
         public JsonItem RightJson { get; }
 
+        public string LeftTitle => string.IsNullOrEmpty(LeftJson.Name) ? LeftJson.Id.ToString() : LeftJson.Name;
+        public string RightTitle => string.IsNullOrEmpty(RightJson.Name) ? RightJson.Id.ToString() : RightJson.Name;
+
         public CompareDialog(JsonItem leftJson, JsonItem rightJson)
         {
             InitializeComponent();
