@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\CompareIcon.ico</ApplicationIcon>
+    <Title>Json data compare tool</Title>
+    <Description>Tool for save and compare json data</Description>
+    <Copyright>Jindrich Zerzanek</Copyright>
+    <PackageIcon>CompareIcon.png</PackageIcon>
+    <Company>Jindrich Zerzanek</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icons\CompareIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JsonViewComparer\JsonViewComparer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Icons\CompareIcon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

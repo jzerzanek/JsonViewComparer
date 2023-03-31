@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="CompareIcon">
+        <Image>
+            <Image.Source>
+                <DrawingImage>
+                    <DrawingImage.Drawing>
+                        <DrawingGroup xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                            <DrawingGroup x:Name="DrawingLayer">
+                                <DrawingGroup.ClipGeometry>
+                                    <RectangleGeometry Rect="0,0,1200,1200" />
+                                </DrawingGroup.ClipGeometry>
+                                <DrawingGroup>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M450,93.75L356.25,18.75 356.25,56.25 187.5,56.25 187.5,131.25 356.25,131.25 356.25,168.75z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M750,337.5L843.75,412.5 843.75,375 1012.5,375 1012.5,300 843.75,300 843.75,262.5z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M1106.2,487.5L693.7,487.5C688.7156,487.472656,683.9266,489.4297,680.388,492.9375L567.888,605.4375C564.3802,608.9766,562.4232,613.7656,562.4505,618.7495L562.4505,1162.4995C562.4505,1167.4722 564.4271,1172.2417 567.9427,1175.7575 571.4583,1179.2731 576.2279,1181.2497 581.2007,1181.2497L1106.2007,1181.2497C1111.1734,1181.2497 1115.9429,1179.2731 1119.4587,1175.7575 1122.9743,1172.2419 1124.9509,1167.4723 1124.9509,1162.4995L1124.9509,506.2495C1124.9509,501.2768 1122.9743,496.5073 1119.4587,492.9915 1115.9431,489.4759 1111.1735,487.4993 1106.2007,487.4993z M1087.45,1143.75L599.95,1143.75 599.95,637.5 693.7,637.5C698.6727,637.5 703.4422,635.5234 706.958,632.0078 710.4736,628.4922 712.4502,623.7226 712.4502,618.7498L712.4502,524.9998 1087.4502,524.9998z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M712.5,675L975,675 975,825 712.5,825z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M806.25,918.75L993.75,918.75 993.75,956.25 806.25,956.25z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M693.75,918.75L768.75,918.75 768.75,956.25 693.75,956.25z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M693.75,1012.5L993.75,1012.5 993.75,1050 693.75,1050z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M225,431.25L468.75,431.25 468.75,581.25 225,581.25z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M318.75,675L487.5,675 487.5,712.5 318.75,712.5z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M206.25,675L281.25,675 281.25,712.5 206.25,712.5z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M206.25,768.75L487.5,768.75 487.5,806.25 206.25,806.25z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Control}}">
+                                        <GeometryDrawing.Geometry>
+                                            <PathGeometry FillRule="Nonzero" Figures="M112.5,393.75L206.25,393.75C211.2227,393.75 215.9922,391.7734 219.508,388.2578 223.0236,384.7422 225.0002,379.9726 225.0002,374.9998L225.0002,281.2498 600.0002,281.2498 600.0002,487.4998 637.5002,487.4998 637.5002,262.4998C637.5002,257.5271 635.5236,252.7576 632.008,249.2418 628.4924,245.7262 623.7228,243.7496 618.75,243.7496L206.25,243.7496C201.2656,243.722256,196.4766,245.6793,192.938,249.1871L80.4379999999999,361.6871C76.9301999999999,365.2262,74.9731999999999,370.0152,75.0004999999999,374.9991L75.0004999999999,918.7491C75.0004999999999,923.7218 76.9770999999999,928.4913 80.4926999999999,932.0071 84.0082999999999,935.5227 88.7778999999999,937.4993 93.7506999999999,937.4993L525.0007,937.4993 525.0007,899.9993 112.5007,899.9993z" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                </DrawingGroup>
+                            </DrawingGroup>
+                        </DrawingGroup>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,119 @@
+﻿<Window x:Class="JsonDataTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:entities="clr-namespace:JsonDataTool.Entities"
+        xmlns:controls="clr-namespace:JsonDataTool.Controls"
+        mc:Ignorable="d"
+        Title="Json data compare tool" Height="450" Width="800">
+<Window.Resources>
+    <DataTemplate x:Key="JsonItemFormTemplate" DataType="{x:Type entities:JsonItem}">
+        <Grid Margin="0,5,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Id"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsEnabled="False" BorderThickness="1,1,1,1" Text="{Binding Id}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Name"/>
+            <TextBox Grid.Row="2" Grid.Column="1" BorderThickness="1,1,1,1" Text="{Binding Name}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Json"/>
+            <TextBox Grid.Row="4" Grid.Column="1" AcceptsReturn="True" TextWrapping="Wrap" 
+                     BorderThickness="1,1,1,1" 
+                     Text="{Binding JsonValue}" 
+                     ToolTip="Insert json data"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="JsonItemListBoxItemTemplate" DataType="{x:Type entities:JsonItem}">
+        <Grid Margin="0,2,2,0" 
+              Height="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" IsChecked="{Binding IsSelected}"/>
+            <TextBox Grid.Column="1" IsEnabled="False" BorderThickness="1,1,0,1" Text="{Binding Id, Mode=OneWay}" />
+            <TextBox Grid.Column="2" IsEnabled="False" BorderThickness="1,1,0,1" Text="{Binding Name, Mode=OneWay}" />
+            <TextBox Grid.Column="3" IsEnabled="False" BorderThickness="1,1,1,1" Text="{Binding FormatedJsonValue, Mode=OneWay}"/>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="ListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+</Window.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <controls:ToolbarItemsControl Items="{Binding ToolbarItems}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Border BorderThickness="0,1,0,0" BorderBrush="Black"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="240"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Grid.Column="0" Margin="2" VerticalAlignment="Center" Width="25" IsChecked="{Binding IsSelectedAll}"/>
+                <TextBlock Grid.Column="1" Margin="2,0,0,0" Text="Id"/>
+                <TextBlock Grid.Column="2" Margin="2,0,0,0" Text="Name"/>
+                <TextBlock Grid.Column="3" Margin="2,0,0,0" Text="Json"/>
+            </Grid>
+
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding JsonItems}" 
+                     SelectedItem="{Binding SelectedJsonItem}"
+                     ItemTemplate="{StaticResource JsonItemListBoxItemTemplate}"
+                     BorderThickness="0"
+                     Margin="0"
+                     Padding="0"/>
+
+        </Grid>
+
+        <GridSplitter Grid.Row="3"  Background="Gray" HorizontalAlignment="Stretch"/>
+
+        <Grid Grid.Row="4">
+            <ContentControl Content="{Binding SelectedJsonItem}" 
+                            ContentTemplate="{StaticResource JsonItemFormTemplate}"
+                            Visibility="{Binding SelectedJsonItem, Converter={StaticResource NullToVisibilityConverter}}"/>
+        </Grid>
+    </Grid>
+</Window>

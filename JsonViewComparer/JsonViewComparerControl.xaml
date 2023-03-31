@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="JsonViewComparer.JsonViewComparerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:entities="clr-namespace:JsonViewComparer.Entities"
+             xmlns:enums="clr-namespace:JsonViewComparer.Enums"
+             xmlns:controls="clr-namespace:JsonViewComparer.Controls"
+             xmlns:converters="clr-namespace:JsonViewComparer.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Name="JsonViewComparerControlRoot">
+    <UserControl.Resources>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+
+        <Style TargetType="{x:Type DataGrid}">
+            <EventSetter Event="PreviewMouseWheel" Handler="UIElement_OnPreviewMouseWheel"/>
+        </Style>
+
+        <Style x:Key="MyGrid" TargetType="Grid">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static enums:JWCState.Modified}">
+                    <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static enums:JWCState.Added}">
+                    <Setter Property="Background" Value="LightGreen"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static enums:JWCState.Deleted}">
+                    <Setter Property="Background" Value="LightCoral"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <DataTemplate x:Key="JWCPropertyCellTemplate">
+            <Grid Style="{StaticResource MyGrid}">
+                <TextBox Background="Transparent" MinWidth="150" HorizontalAlignment="Stretch" IsReadOnly="True" Text="{Binding Value }"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="JWCObjectCellTemplate">
+            <Grid Style="{StaticResource MyGrid}">
+                <ItemsControl ItemsSource="{Binding Items }"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="JWCSimpleArrayCellTemplate">
+            <Grid Style="{StaticResource MyGrid}">
+                <ItemsControl ItemsSource="{Binding Values}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox IsReadOnly="True" Text="{Binding Mode=OneWay}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="JWCObjectArrayCellTemplate">
+            <Grid Style="{StaticResource MyGrid}">
+                <controls:DataGridWithBindableColumns AutoGenerateColumns="False" 
+                                             CanUserAddRows="False" 
+                                             CanUserDeleteRows="False" 
+                                             IsReadOnly="True" 
+                                             BindableColumns="{Binding Columns}" 
+                                             ItemsSource="{Binding DataTable.DefaultView}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type entities:JWCObjectArray}">
+            <Grid Style="{StaticResource MyGrid}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Key}"/>
+                    <controls:DataGridWithBindableColumns AutoGenerateColumns="False" 
+                                                 CanUserAddRows="False" 
+                                                 CanUserDeleteRows="False" 
+                                                 IsReadOnly="True" 
+                                                 BindableColumns="{Binding Columns}" 
+                                                 ItemsSource="{Binding DataTable.DefaultView}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type entities:JWCSimpleArray}">
+            <StackPanel>
+                <TextBlock Text="{Binding Key}"/>
+                <ItemsControl ItemsSource="{Binding Values}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox IsReadOnly="True" Text="{Binding Mode=OneWay}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type entities:JWCObject}">
+            <StackPanel>
+                <TextBlock Text="{Binding Key}"/>
+                <ItemsControl ItemsSource="{Binding Items }"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type entities:JWCProperty}">
+            <Grid Style="{StaticResource MyGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="MyColumn"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Key, Mode=OneWay}"/>
+                <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Value, Mode=OneWay}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid >
+                <StackPanel>
+                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding LeftTitle, ElementName=JsonViewComparerControlRoot}"/>
+                    <ContentPresenter Content="{Binding}" Margin="2"
+                                      Visibility="{Binding LeftValue, ElementName=JsonViewComparerControlRoot, Converter={StaticResource NullToVisibilityConverter}}">
+                        <ContentPresenter.Style>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="ContentTemplate" >
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding LeftValue, ElementName=JsonViewComparerControlRoot, Mode=OneWay}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsLeftJson, ElementName=JsonViewComparerControlRoot}" Value="True">
+                                        <Setter Property="ContentTemplate" >
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <ContentControl Content="{Binding LeftProperties, ElementName=JsonViewComparerControlRoot}" />
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentPresenter.Style>
+                    </ContentPresenter>
+                </StackPanel>
+            </Grid>
+            <GridSplitter Background="Gray" Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2">
+                <StackPanel>
+                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding RightTitle, ElementName=JsonViewComparerControlRoot}"/>
+                    <ContentPresenter Content="{Binding}" Margin="2"
+                                  Visibility="{Binding RightValue, ElementName=JsonViewComparerControlRoot, Converter={StaticResource NullToVisibilityConverter}}" >
+                        <ContentPresenter.Style>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="ContentTemplate" >
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding RightValue, ElementName=JsonViewComparerControlRoot, Mode=OneWay}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsRightJson, ElementName=JsonViewComparerControlRoot}" Value="True">
+                                        <Setter Property="ContentTemplate" >
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <ContentControl Content="{Binding RightProperties, ElementName=JsonViewComparerControlRoot}" />
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentPresenter.Style>
+                    </ContentPresenter>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
