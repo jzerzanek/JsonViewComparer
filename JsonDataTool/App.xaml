@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Resources/Icons/RemoveIcon.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/CompareIcon.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/SaveIcon.xaml"/>
+                <ResourceDictionary Source="Resources/Icons/ReformatIcon.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

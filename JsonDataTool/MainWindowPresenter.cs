@@ -1,6 +1,8 @@
 ﻿using JsonDataTool.Controls;
 using JsonDataTool.Entities;
 using JsonDataTool.Providers;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -62,10 +64,33 @@ namespace JsonDataTool
                     "RemoveIcon", "Remove", "Remove selected items"),
                 new SeparatorToolbarItem(),
                 new ToolbarItem(new Command(this.Compare, () => this.JsonItems.Count(j=>j.IsSelected) == 2),
-                    "CompareIcon","Compare", "Compare two selected items")
+                    "CompareIcon","Compare", "Compare two selected items"),
+                new ToolbarItem(new Command(this.Reformat, () => this.SelectedJsonItem != null),
+                    "ReformatIcon","Reformat", "Reformat json in selected item")
             };
 
             this.Reload();
+        }
+
+        private void Reformat()
+        {
+            string jsonValue = this.SelectedJsonItem.JsonValue;
+
+            if (string.IsNullOrEmpty(jsonValue))
+            {
+                return;
+            }
+
+            try
+            {
+                var jObject = JObject.Parse(jsonValue);
+
+                this.selectedJsonItem.JsonValue = jObject.ToString(Newtonsoft.Json.Formatting.Indented);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Json can not be reformat.", "Error reformat json", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Save()
